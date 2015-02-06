@@ -45,3 +45,26 @@ characters allowed in the string.
 - `count` - **Required.** The number of items in this list.
 - `varlabel` - **Optional, null by default**. In case you want to refer to this
 list later.
+
+`float-list` - List of floats.
+
+- `min` - **Required.** Minimum possible value.
+- `max` - **Required.** Maximum possible value.
+- `precision` - **Default is whatever is set for your Python interpreter.** How
+many digits go after the decimal point?
+- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
+- `count` - **Required.** The number of items in this list.
+- `varlabel` - **Optional, null by default**. In case you want to refer to this
+list later.
+
+`str-list` - List of strings.
+
+- `charset` - **Alphanumeric lowercase by default.** Enumerate all the possible
+characters allowed in the string.
+- `min-len` - **1 by default.** Minimum possible length of the string generated.
+- `max-len` - **Required.** Maximum possible length of the string generated.
+- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
+- `count` - **Required.** The number of items in this list.
+- `varlabel` - **Optional, null by default**. In case you want to refer to this
+list later.
+
