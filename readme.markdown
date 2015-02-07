@@ -54,6 +54,8 @@ characters allowed in the string.
 - `min-len` - **1 by default.** Minimum possible length of the string generated.
 - `max-len` - **Required.** Maximum possible length of the string generated.
 
+**Note:** For fixed-length strings, just specify the same `min-len` and `max-len`.
+
 ## List types
 
 List types allow you to group atomic types in a single line. Their type key is
