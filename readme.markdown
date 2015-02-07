@@ -18,6 +18,11 @@ Pass a JSON file that contains the specifications of your test input. Example,
 
 # Types and related attributes
 
+Every line in a test case is a particular type. This section explains the
+available types for test.
+
+## Atomic types
+
 `int` - Integer value.
 
 - `min` - **Required.** Minimum possible value.
@@ -36,6 +41,12 @@ many digits go after the decimal point?
 characters allowed in the string.
 - `min-len` - **1 by default.** Minimum possible length of the string generated.
 - `max-len` - **Required.** Maximum possible length of the string generated.
+
+## List types
+
+List types allow you to group atomic types in a single line. Their type key is
+the same as their atomic counterparts _but_ appended with `-list`. They feature
+three new attributes: `delimiter`, `count`, and `varlabel`.
 
 `int-list` - List of integers.
 
@@ -68,3 +79,16 @@ characters allowed in the string.
 - `varlabel` - **Optional, null by default**. In case you want to refer to this
 list later.
 
+## Reference type
+
+The reference type produce the same output as atomic types but it is guaranteed
+that their value can be found in a previously declared list type. Selection is
+done (pseudo-)randomly.
+
+To use a previously declared list type, the particular list type must have a
+`varlabel` declared. An error will be thrown if you use an undeclared `varlabel`.
+
+`ref` - A value from some previously-declared list type.
+
+- `varlabel` - **Required.** The corresponding `varlabel` of the list type from
+which we pick a value in random.
