@@ -1,0 +1,7 @@
+{
+    "case-count": 8,
+    "include-case-count": true,
+    "case-format":[
+        {"type": "int-list", "min":0, "max":1000000, "count": 2, "sort-by":"asc"}
+    ]
+}
