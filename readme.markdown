@@ -46,7 +46,7 @@ characters allowed in the string.
 
 List types allow you to group atomic types in a single line. Their type key is
 the same as their atomic counterparts _but_ appended with `-list`. They feature
-three new attributes: `delimiter`, `count`, and `varlabel`.
+four new attributes: `delimiter`, `count`, `sort-by`, and `varlabel`.
 
 `int-list` - List of integers.
 
@@ -54,6 +54,8 @@ three new attributes: `delimiter`, `count`, and `varlabel`.
 - `max` - **Required.** Maximum possible value
 - `delimiter` - **Space by default.** The delimiter to separate the items of the list.
 - `count` - **Required.** The number of items in this list.
+- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
+or `"desc"`.
 - `varlabel` - **Optional, null by default**. In case you want to refer to this
 list later.
 
@@ -65,6 +67,8 @@ list later.
 many digits go after the decimal point?
 - `delimiter` - **Space by default.** The delimiter to separate the items of the list.
 - `count` - **Required.** The number of items in this list.
+- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
+or `"desc"`.
 - `varlabel` - **Optional, null by default**. In case you want to refer to this
 list later.
 
@@ -76,6 +80,8 @@ characters allowed in the string.
 - `max-len` - **Required.** Maximum possible length of the string generated.
 - `delimiter` - **Space by default.** The delimiter to separate the items of the list.
 - `count` - **Required.** The number of items in this list.
+- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
+or `"desc"`.
 - `varlabel` - **Optional, null by default**. In case you want to refer to this
 list later.
 
