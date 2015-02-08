@@ -76,7 +76,7 @@ class Titan(object):
         parsing.
         """
         generator_method = self.type_map[rule["type"]]
-        arglist = self.arg_mapping[rult["type"]]
+        arglist = self.arg_mapping[rule["type"]]
         constructed_args = {}
 
         for jspec_key in arglist.keys():
