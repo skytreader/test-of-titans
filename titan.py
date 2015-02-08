@@ -4,7 +4,7 @@ import random
 import string
 
 class Titan(object):
-    # TODO Note of varlabel!
+    # Super TODO Reference types!
     
     def __init__(self):
         self.type_map = dict()
@@ -16,8 +16,21 @@ class Titan(object):
         self.type_map["str-list"] = self.__strlist
 
         self.arg_mapping = dict()
-        # Map the specified attribute to the name of the argument/
+        # Map the specified attribute to the name of the argument.
         self.arg_mapping["int"] = {"min":"mini", "max":"maxi"}
+        self.arg_mapping["float"] = {"min":"mini", "max":"maxi",
+          "precision":"precision"}
+        self.arg_mapping["str"] = {"charset":"charset", "min-len":"minlen",
+          "max-len":"maxlen"}
+        self.arg_mapping["int-list"] = {"min":"mini", "max":"maxi",
+          "delimiter":"delimiter", "count":"count", "sort-by":"sort_by",
+          "varlabel":"varlabel"}
+        self.arg_mapping["float-list"] = {"min":"mini", "max":"maxi",
+          "delimiter":"delimiter", "count":"count", "sort-by":"sort_by",
+          "varlabel":"varlabel", "precision":"precision"}
+        self.arg_mapping["str-list"] = {"charset":"charset", "min-len":"minlen",
+          "max-len":"maxlen", "delimiter":"delimiter", "count":"count",
+          "sort-by":"sort_by", "varlabel":"varlabel"}
 
     def __int(self, mini, maxi):
         return str(random.randint(mini, maxi))
