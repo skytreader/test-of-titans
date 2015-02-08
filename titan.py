@@ -80,6 +80,6 @@ class Titan(object):
         constructed_args = {}
 
         for jspec_key in arglist.keys():
-            constructed_args[arglist[jspec_key]] = rule[jspec_key]
+            constructed_args[arglist[jspec_key]] = rule.get(jspec_key)
 
         return generator_method(**constructed_args)
