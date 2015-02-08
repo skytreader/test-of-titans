@@ -15,6 +15,10 @@ class Titan(object):
         self.type_map["float-list"] = self.__floatlist
         self.type_map["str-list"] = self.__strlist
 
+        self.arg_mapping = dict()
+        # Map the specified attribute to the name of the argument/
+        self.arg_mapping["int"] = {"min":"mini", "max":"maxi"}
+
     def __int(self, mini, maxi):
         return str(random.randint(mini, maxi))
     
@@ -58,4 +62,11 @@ class Titan(object):
         Pass the type maps here. Note: pass Python dicts, not JSON maps for
         parsing.
         """
-        pass
+        generator_method = self.type_map[rule["type"]]
+        arglist = self.arg_mapping[rult["type"]]
+        constructed_args = {}
+
+        for jspec_key in arglist.keys():
+            constructed_args[arglist[jspec_key]] = rule[jspec_key]
+
+        return generator_method(**constructed_args)
