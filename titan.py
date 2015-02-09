@@ -40,11 +40,12 @@ class Titan(object):
         return str(random.uniform(mini, maxi))
 
     def __str(self, maxlen, minlen=1, charset=None):
-        charset = charset if charset else "".join((string.lowercase, string.digits))
+        charset = charset if charset else "".join((string.ascii_lowercase, string.digits))
         # TODO minlen!
         return "".join([random.choice(charset) for _ in range(maxlen)])
 
-    def __intlist(self, mini, maxi, count, delimiter=" ", sort_by=None, varlabel=None):
+    def __intlist(self, mini, maxi, count, delimiter=None, sort_by=None, varlabel=None):
+        delimiter = delimiter if delimiter else " "
         ints = [self.__int(mini, maxi) for _ in range(count)]
 
         if sort_by:
@@ -52,8 +53,9 @@ class Titan(object):
 
         return delimiter.join(list(map(str, ints)))
 
-    def __floatlist(self, mini, maxi, count, precision=None, delimiter=" ",
+    def __floatlist(self, mini, maxi, count, precision=None, delimiter=None,
       sort_by=None, varlabel=None):
+        delimiter = delimiter if delimiter else " "
         floats = [self.__float(mini, maxi, precision) for _ in range(count)]
 
         if sort_by:
@@ -61,8 +63,9 @@ class Titan(object):
 
         return delimiter.join(list(map(str, floats)))
 
-    def __strlist(self, maxlen, count, minlen=1, charset=None, delimiter=" ",
+    def __strlist(self, maxlen, count, minlen=1, charset=None, delimiter=None,
       sort_by=None, varlabel=None):
+        delimiter = delimiter if delimiter else " "
         strings = [self.__str(maxlen, minlen, charset) for _ in range(count)]
 
         if sort_by:
