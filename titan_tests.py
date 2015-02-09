@@ -8,61 +8,73 @@ class TitanTests(unittest.TestCase):
     
     def setUp(self):
         self.titan = Titan()
+
+        self.int_min = 1
+        self.int_max = 1000
+        self.float_min = 0.01
+        self.float_max = 3.14159265358
+        self.str_minlen = 4
+        self.str_maxlen = 8
+        self.list_minlen = 10
+        self.list_maxlen = 100
+
+        self.test_precision = 100
     
     def test_atomic_int(self):
-        for _ in range(100):
-            retint = int(self.titan.interpret({"type":"int", "min":1, "max":1000}))
-            self.assertTrue(1 <= retint <= 1000)
+        for _ in range(self.test_precision):
+            retint = int(self.titan.interpret({"type":"int", "min":self.int_min,
+              "max":self.int_max}))
+            self.assertTrue(self.int_min <= retint <= self.int_max)
 
     def test_atomic_float(self):
-        for _ in range(100):
-            retfloat = float(self.titan.interpret({"type":"float", "min":0.01,
-              "max":3.14159265358}))
-            self.assertTrue(0.01 <= retfloat <= 3.14159265358)
+        for _ in range(self.test_precision):
+            retfloat = float(self.titan.interpret({"type":"float", "min":self.float_min,
+              "max":self.float_max}))
+            self.assertTrue(self.float_min <= retfloat <= self.float_max)
 
     def test_atomic_string(self):
-        for _ in range(100):
+        for _ in range(self.test_precision):
             retstr = self.titan.interpret({"type":"str", "charset":string.hexdigits,
-              "min-len":4, "max-len":8})
-            self.assertTrue(4 <= len(retstr) <= 8)
+              "min-len":self.str_minlen, "max-len":self.str_maxlen})
+            self.assertTrue(self.str_minlen <= len(retstr) <= self.str_maxlen)
 
             for c in retstr:
                 self.assertTrue(c in string.hexdigits)
 
     def test_list_int(self):
-        for _ in range(100):
-            expected_len = random.randint(10, 100)
-            raw = self.titan.interpret({"type":"int-list", "min":1, "max":1000,
-              "count":expected_len})
+        for _ in range(self.test_precision):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            raw = self.titan.interpret({"type":"int-list", "min":self.int_min,
+              "max":self.int_max, "count":expected_len})
             intlist = list(map(int, raw.split()))
             self.assertEqual(expected_len, len(intlist))
 
             for item in intlist:
-                self.assertTrue(1 <= item <= 1000)
+                self.assertTrue(self.int_min <= item <= self.int_max)
 
     def test_list_float(self):
-        for _ in range(100):
-            expected_len = random.randint(10, 100)
-            raw = self.titan.interpret({"type":"float-list", "min":0.01,
-              "max":3.14159265358, "count":expected_len})
+        for _ in range(self.test_precision):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            raw = self.titan.interpret({"type":"float-list", "min":self.float_min,
+              "max":self.float_max, "count":expected_len})
             floatlist = list(map(float, raw.split()))
             self.assertEqual(expected_len, len(floatlist))
 
             for item in floatlist:
-                self.assertTrue(0.01 <= item <= 3.14159265358)
+                self.assertTrue(self.float_min <= item <= self.float_max)
 
     def test_list_str(self):
         possible_charsets = (string.hexdigits, string.punctuation,
           string.ascii_letters, None)
-        for _ in range(100):
-            expected_len = random.randint(10, 100)
+        for _ in range(self.test_precision):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
             charset = random.choice(possible_charsets)
-            strlist = self.titan.interpret({"type":"str-list", "min-len":4,
-              "max-len":8, "count":expected_len, "charset":charset}).split()
+            strlist = self.titan.interpret({"type":"str-list", "min-len":self.str_minlen,
+              "max-len":self.str_maxlen, "count":expected_len, "charset":charset}).split()
             self.assertEqual(expected_len, len(strlist))
 
             for item in strlist:
-                self.assertTrue(4 <= len(item) <= 8)
+                self.assertTrue(self.str_minlen <= len(item) <= self.str_maxlen)
                 
                 for c in item:
                     if charset:
