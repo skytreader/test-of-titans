@@ -4,7 +4,6 @@ import random
 import string
 
 class Titan(object):
-    # Super TODO Reference types!
     
     def __init__(self):
         self.type_map = dict()
@@ -32,6 +31,10 @@ class Titan(object):
           "max-len":"maxlen", "delimiter":"delimiter", "count":"count",
           "sort-by":"sort_by", "varlabel":"varlabel"}
 
+        # Contains all the lists for our reference type
+        # This will be a mapping of varlabels to the list generated
+        self.reftype_lookup = {}
+
     def __int(self, mini, maxi):
         return str(random.randint(mini, maxi))
     
@@ -44,14 +47,24 @@ class Titan(object):
         # TODO minlen!
         return "".join([random.choice(charset) for _ in range(maxlen)])
 
-    def __intlist(self, mini, maxi, count, delimiter=None, sort_by=None, varlabel=None):
+    def __lister(self, atom_fun, atom_args, count, delimiter=None, sort_by=None,
+      varlabel=None):
         delimiter = delimiter if delimiter else " "
-        ints = [self.__int(mini, maxi) for _ in range(count)]
+        ls = [atom_fun(**atom_args) for _ in range(count)]
 
         if sort_by:
-            ints.sort(reverse, reverse = (sort_by == "desc"))
+            ls.sort(reverse = (sort_by == "desc"))
 
-        return delimiter.join(list(map(str, ints)))
+        print_ls = delimiter.join(list(map(str, ls)))
+
+        if varlabel:
+            self.reftype_lookup[varlabel] = ls
+
+        return print_ls
+
+    def __intlist(self, mini, maxi, count, delimiter=None, sort_by=None, varlabel=None):
+        return self.__lister(self.__int, {"maxi":maxi, "mini":mini}, count,
+          delimiter, sort_by, varlabel)
 
     def __floatlist(self, mini, maxi, count, precision=None, delimiter=None,
       sort_by=None, varlabel=None):
