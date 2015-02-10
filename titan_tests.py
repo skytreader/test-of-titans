@@ -89,9 +89,31 @@ class TitanTests(unittest.TestCase):
               "max":self.int_max, "count":self.list_maxlen, "varlabel":label})
             intlist = list(map(int, intlist.split()))
 
-            for __ in range(self.test_precision):
+            for _ in range(self.test_precision):
                 refint = int(self.titan.interpret({"type":"ref", "varlabel":label}))
                 self.assertTrue(refint in intlist)
+
+    def test_reftype_float(self):
+        for label_id in range(self.test_precision):
+            label = "varlabel" + str(label_id)
+            floatlist = self.titan.interpret({"type":"float-list", "min":self.float_min,
+              "max":self.float_max, "count":self.list_maxlen, "varlabel":label})
+            floatlist = list(map(float, floatlist.split()))
+
+            for _ in range(self.test_precision):
+                reffloat = float(self.titan.interpret({"type":"ref", "varlabel":label}))
+                self.assertTrue(reffloat in floatlist)
+
+    def test_reftype_str(self):
+        for label_id in range(self.test_precision):
+            label = "varlabel" + str(label_id)
+            strlist = self.titan.interpret({"type":"str-list", "min-len":self.str_minlen,
+              "max-len":self.str_maxlen, "count":self.list_maxlen, "varlabel":label})
+            floatlist = strlist.split()
+
+            for _ in range(self.test_precision):
+                refstr = self.titan.interpret({"type":"ref", "varlabel":label})
+                self.assertTrue(refstr in strlist)
 
 if __name__ == "__main__":
     unittest.main()
