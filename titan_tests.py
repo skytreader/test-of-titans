@@ -82,5 +82,15 @@ class TitanTests(unittest.TestCase):
                     else:
                         self.assertTrue(c in "".join((string.ascii_lowercase, string.digits)))
 
+    def test_reftype_int(self):
+        for label_id in range(self.test_precision):
+            label = "varlabel" + str(label_id)
+            intlist = self.titan.interpret({"type":"int-list", "min":self.int_min,
+              "max":self.int_max, "count":self.list_maxlen, "varlabel":label})
+
+            for __ in range(self.test_precision):
+                refint = int(self.titan.interpret({"type":"ref", "varlabel":label}))
+                self.assertTrue(refint in intlist)
+
 if __name__ == "__main__":
     unittest.main()
