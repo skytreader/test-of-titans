@@ -70,23 +70,13 @@ class Titan(object):
 
     def __floatlist(self, mini, maxi, count, precision=None, delimiter=None,
       sort_by=None, varlabel=None):
-        delimiter = delimiter if delimiter else " "
-        floats = [self.__float(mini, maxi, precision) for _ in range(count)]
-
-        if sort_by:
-            floats.sort(reverse, reverse = (sort_by == "desc"))
-
-        return delimiter.join(list(map(str, floats)))
+        return self.__lister(self.__float, {"maxi":maxi, "mini":mini,
+          "precision":precision}, count, delimiter, sort_by, varlabel)
 
     def __strlist(self, maxlen, count, minlen=1, charset=None, delimiter=None,
       sort_by=None, varlabel=None):
-        delimiter = delimiter if delimiter else " "
-        strings = [self.__str(maxlen, minlen, charset) for _ in range(count)]
-
-        if sort_by:
-            strings.sort(reverse, reverse = (sort_by == "desc"))
-
-        return delimiter.join(strings)
+        return self.__lister(self.__str, {"maxlen":maxlen, "minlen":minlen,
+          "charset":charset}, count, delimiter, sort_by, varlabel)
 
     def __ref(self, varlabel):
         prevls = self.reftype_lookup[varlabel]
