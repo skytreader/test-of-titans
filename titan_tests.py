@@ -87,6 +87,7 @@ class TitanTests(unittest.TestCase):
             label = "varlabel" + str(label_id)
             intlist = self.titan.interpret({"type":"int-list", "min":self.int_min,
               "max":self.int_max, "count":self.list_maxlen, "varlabel":label})
+            intlist = list(map(int, intlist.split()))
 
             for __ in range(self.test_precision):
                 refint = int(self.titan.interpret({"type":"ref", "varlabel":label}))

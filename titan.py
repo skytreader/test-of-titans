@@ -13,6 +13,7 @@ class Titan(object):
         self.type_map["int-list"] = self.__intlist
         self.type_map["float-list"] = self.__floatlist
         self.type_map["str-list"] = self.__strlist
+        self.type_map["ref"] = self.__ref
 
         self.arg_mapping = dict()
         # Map the specified attribute to the name of the argument.
@@ -30,6 +31,7 @@ class Titan(object):
         self.arg_mapping["str-list"] = {"charset":"charset", "min-len":"minlen",
           "max-len":"maxlen", "delimiter":"delimiter", "count":"count",
           "sort-by":"sort_by", "varlabel":"varlabel"}
+        self.arg_mapping["ref"] = {"varlabel":"varlabel"}
 
         # Contains all the lists for our reference type
         # This will be a mapping of varlabels to the list generated
@@ -85,6 +87,10 @@ class Titan(object):
             strings.sort(reverse, reverse = (sort_by == "desc"))
 
         return delimiter.join(strings)
+
+    def __ref(self, varlabel):
+        prevls = self.reftype_lookup[varlabel]
+        return str(random.choice(prevls))
 
     def interpret(self, rule):
         """
