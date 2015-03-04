@@ -1,5 +1,7 @@
 # Test of Titans
 
+[![Coverage Status](https://coveralls.io/repos/skytreader/test-of-titans/badge.svg?branch=master)](https://coveralls.io/r/skytreader/test-of-titans?branch=master)
+
 Generating large inputs for programming contests should not be a pain in the @$$.
 Test of Titans (TM) will help you generate as many test cases as needed and as
 large as specified.
