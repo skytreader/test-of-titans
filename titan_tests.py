@@ -122,6 +122,31 @@ class TitanTests(unittest.TestCase):
                     else:
                         self.assertTrue(c in "".join((string.ascii_lowercase, string.digits)))
 
+    def test_sorted_list_str(self):
+        half_run = int(self.test_precision / 2)
+        possible_charsets = (string.hexdigits, string.punctuation,
+          string.ascii_letters, None)
+
+        for _ in range(half_run):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            charset = random.choice(possible_charsets)
+            strlist = self.titan.interpret({"type":"str-list", "min-len":self.str_minlen,
+              "max-len":self.str_maxlen, "count":expected_len, "charset":charset,
+              "sort-by":"desc"}).split()
+            self.assertEqual(expected_len, len(strlist))
+            sorted_strlist = sorted(strlist, reverse=True)
+            self.assertEqual(sorted_strlist, strlist)
+
+        for _ in range(half_run):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            charset = random.choice(possible_charsets)
+            strlist = self.titan.interpret({"type":"str-list", "min-len":self.str_minlen,
+              "max-len":self.str_maxlen, "count":expected_len, "charset":charset,
+              "sort-by":"asc"}).split()
+            self.assertEqual(expected_len, len(strlist))
+            sorted_strlist = sorted(strlist)
+            self.assertEqual(sorted_strlist, strlist)
+
     def test_reftype_int(self):
         for label_id in range(self.test_precision):
             label = "varlabel" + str(label_id)
