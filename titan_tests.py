@@ -16,7 +16,7 @@ class TitanTests(unittest.TestCase):
         self.str_minlen = 4
         self.str_maxlen = 8
         self.list_minlen = 10
-        self.list_maxlen = 100
+        self.list_maxlen = 10
 
         self.test_precision = 100
     
