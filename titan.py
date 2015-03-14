@@ -42,7 +42,7 @@ class Titan(object):
     
     def __float(self, mini, maxi, precision=None):
         # TODO Precision!
-        return str(random.uniform(mini, maxi))
+        return random.uniform(mini, maxi)
 
     def __str(self, maxlen, minlen=1, charset=None):
         charset = charset if charset else "".join((string.ascii_lowercase, string.digits))
@@ -55,7 +55,7 @@ class Titan(object):
         ls = [atom_fun(**atom_args) for _ in range(count)]
 
         if sort_by:
-            ls.sort(reverse = True)
+            ls.sort(reverse = (sort_by == "desc"))
 
         print_ls = delimiter.join(list(map(str, ls)))
 
