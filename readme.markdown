@@ -1,5 +1,6 @@
 # Test of Titans
 
+[![Build Status](https://travis-ci.org/skytreader/test-of-titans.svg?branch=master)](https://travis-ci.org/skytreader/test-of-titans)
 [![Coverage Status](https://coveralls.io/repos/skytreader/test-of-titans/badge.svg?branch=master)](https://coveralls.io/r/skytreader/test-of-titans?branch=master)
 
 Generating large inputs for programming contests should not be a pain in the @$$.
