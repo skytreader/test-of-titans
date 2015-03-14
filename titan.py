@@ -51,11 +51,15 @@ class Titan(object):
 
     def __lister(self, atom_fun, atom_args, count, delimiter=None, sort_by=None,
       varlabel=None):
+        print("sort_by is " + str(sort_by))
+        print(sort_by == "desc")
         delimiter = delimiter if delimiter else " "
         ls = [atom_fun(**atom_args) for _ in range(count)]
 
         if sort_by:
-            ls.sort(reverse = (sort_by == "desc"))
+            print("Current list is " + str(ls))
+            ls.sort(reverse = True)
+            print("Sorted list is " + str(ls))
 
         print_ls = delimiter.join(list(map(str, ls)))
 
