@@ -83,6 +83,26 @@ class TitanTests(unittest.TestCase):
             for item in floatlist:
                 self.assertTrue(self.float_min <= item <= self.float_max)
 
+    def test_sorted_list_float(self):
+        half_run = int(self.test_precision / 2)
+        for _ in range(half_run):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            raw = self.titan.interpret({"type":"float-list", "min":self.float_min,
+              "max":self.float_max, "count":expected_len, "sort-by":"desc"})
+            floatlist = list(map(float, raw.split()))
+            self.assertEqual(expected_len, len(floatlist))
+            sorted_floatlist = sorted(floatlist, reverse=True)
+            self.assertEqual(floatlist, sorted_floatlist)
+
+        for _ in range(half_run):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            raw = self.titan.interpret({"type":"float-list", "min":self.float_min,
+              "max":self.float_max, "count":expected_len, "sort-by":"asc"})
+            floatlist = list(map(float, raw.split()))
+            self.assertEqual(expected_len, len(floatlist))
+            sorted_floatlist = sorted(floatlist)
+            self.assertEqual(floatlist, sorted_floatlist)
+
     def test_list_str(self):
         possible_charsets = (string.hexdigits, string.punctuation,
           string.ascii_letters, None)
