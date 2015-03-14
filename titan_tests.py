@@ -114,6 +114,3 @@ class TitanTests(unittest.TestCase):
             for _ in range(self.test_precision):
                 refstr = self.titan.interpret({"type":"ref", "varlabel":label})
                 self.assertTrue(refstr in strlist)
-
-if __name__ == "__main__":
-    unittest.main()
