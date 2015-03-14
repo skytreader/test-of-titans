@@ -16,7 +16,7 @@ class TitanTests(unittest.TestCase):
         self.str_minlen = 4
         self.str_maxlen = 8
         self.list_minlen = 10
-        self.list_maxlen = 10
+        self.list_maxlen = 100
 
         self.test_precision = 100
     
@@ -52,14 +52,24 @@ class TitanTests(unittest.TestCase):
             for item in intlist:
                 self.assertTrue(self.int_min <= item <= self.int_max)
 
-    def test_reverse_list_int(self):
-        for _ in range(int(self.test_precision / 2)):
+    def test_sorted_list_int(self):
+        half_run = int(self.test_precision / 2)
+        for _ in range(half_run):
             expected_len = random.randint(self.list_minlen, self.list_maxlen)
             raw = self.titan.interpret({"type":"int-list", "min":self.int_min,
               "max":self.int_max, "count":expected_len, "sort-by":"desc"})
             intlist = list(map(int, raw.split()))
             self.assertEqual(expected_len, len(intlist))
             sorted_intlist = sorted(intlist, reverse=True)
+            self.assertEqual(intlist, sorted_intlist)
+
+        for _ in range(half_run):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            raw = self.titan.interpret({"type":"int-list", "min":self.int_min,
+              "max":self.int_max, "count":expected_len, "sort-by":"asc"})
+            intlist = list(map(int, raw.split()))
+            self.assertEqual(expected_len, len(intlist))
+            sorted_intlist = sorted(intlist)
             self.assertEqual(intlist, sorted_intlist)
 
     def test_list_float(self):
