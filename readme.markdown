@@ -115,3 +115,7 @@ To use a previously declared list type, the particular list type must have a
 
 - `varlabel` - **Required.** The corresponding `varlabel` of the list type from
 which we pick a value in random.
+
+# License
+
+MIT
