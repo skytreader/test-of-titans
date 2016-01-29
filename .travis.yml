@@ -1,6 +1,6 @@
 language: python
 python:
-    - "3.2"
+    - "3.4"
 before_script: "pip install -r requirements.txt"
 script: "nosetests --with-xcoverage"
 after_success: "COVERALLS_REPO_TOKEN=$coveralls_token coveralls"
