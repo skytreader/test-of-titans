@@ -1,0 +1,7 @@
+{
+    "case-count": 100,
+    "include-case-count": true,
+    "case-format":[
+        {"type": "int", "min": 0, "max": 1000000}
+    ]
+}

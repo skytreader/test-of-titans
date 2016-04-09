@@ -1,7 +1,9 @@
 #! /usr/bin/env python3
 
+import json
 import random
 import string
+import sys
 
 class Titan(object):
     
@@ -95,3 +97,19 @@ class Titan(object):
             constructed_args[arglist[jspec_key]] = rule.get(jspec_key)
 
         return generator_method(**constructed_args)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python", sys.argv[0], "spec.json")
+        exit(1)
+
+    with open(sys.argv[1]) as json_spec:
+        spec = json.load(json_spec)
+        titan = Titan()
+        
+        if spec["include-case-count"]:
+            print(spec["case-count"])
+
+        for i in range(spec["case-count"]):
+            for rule in spec["case-format"]:
+                print(titan.interpret(rule))
