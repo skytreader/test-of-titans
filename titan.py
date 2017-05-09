@@ -48,8 +48,7 @@ class Titan(object):
 
     def __str(self, maxlen, minlen=1, charset=None):
         charset = charset if charset else "".join((string.ascii_lowercase, string.digits))
-        # TODO minlen!
-        return "".join([random.choice(charset) for _ in range(maxlen)])
+        return "".join([random.choice(charset) for _ in range(random.randint(minlen, maxlen))])
 
     def __lister(self, atom_fun, atom_args, count, delimiter=None, sort_by=None,
       varlabel=None):
