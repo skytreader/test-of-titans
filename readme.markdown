@@ -98,7 +98,7 @@ characters allowed in the string.
 
 ## Reference type
 
-The reference type produce the same output as atomic types but it is guaranteed
+The reference type produces the same output as atomic types but it is guaranteed
 that their value can be found in a previously declared list type. Selection is
 done (pseudo-)randomly.
 

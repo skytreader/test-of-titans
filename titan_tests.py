@@ -147,6 +147,19 @@ class TitanTests(unittest.TestCase):
             sorted_strlist = sorted(strlist)
             self.assertEqual(sorted_strlist, strlist)
 
+    def test_list_isnot_int(self):
+        is_not_list = self.titan.interpret({
+            "type": "int-list", "min": 4, "max": 8, "count": 2,
+            "varlabel": "queen"
+        })
+
+        for _ in range(self.test_precision):
+            intlist = self.titan.interpret({
+                "type": "int-list", "min": 4, "max": 8, "count": 2,
+                "not-in": "queen"
+            })
+            self.assertNotEqual(is_not_list, intlist)
+
     def test_reftype_int(self):
         for label_id in range(self.test_precision):
             label = "varlabel" + str(label_id)
