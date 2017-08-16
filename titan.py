@@ -5,7 +5,13 @@ import random
 import string
 import sys
 
+VERSION = "0.1.0"
+
 class Titan(object):
+    """
+    **Roughly,** each documented type is constructed via a (private) method of
+    this class.
+    """
     
     def __init__(self):
         self.type_map = dict()
@@ -18,26 +24,41 @@ class Titan(object):
         self.type_map["ref"] = self.__ref
 
         self.arg_mapping = dict()
-        # Map the specified attribute to the name of the argument.
+        # Map the specified attribute to the name of the argument in its
+        # corresponding method.
         self.arg_mapping["int"] = {"min":"mini", "max":"maxi"}
         self.arg_mapping["float"] = {"min":"mini", "max":"maxi",
           "precision":"precision"}
         self.arg_mapping["str"] = {"charset":"charset", "min-len":"minlen",
           "max-len":"maxlen"}
-        self.arg_mapping["int-list"] = {"min":"mini", "max":"maxi",
-          "delimiter":"delimiter", "count":"count", "sort-by":"sort_by",
-          "varlabel":"varlabel"}
-        self.arg_mapping["float-list"] = {"min":"mini", "max":"maxi",
-          "delimiter":"delimiter", "count":"count", "sort-by":"sort_by",
-          "varlabel":"varlabel", "precision":"precision"}
-        self.arg_mapping["str-list"] = {"charset":"charset", "min-len":"minlen",
-          "max-len":"maxlen", "delimiter":"delimiter", "count":"count",
-          "sort-by":"sort_by", "varlabel":"varlabel"}
+        self.arg_mapping["int-list"] = Titan.__wrap_for_list({"min":"mini", "max":"maxi"})
+        self.arg_mapping["float-list"] = Titan.__wrap_for_list({"min":"mini", "max":"maxi", "precision": "precision"})
+        self.arg_mapping["str-list"] = Titan.__wrap_for_list({"charset": "charset", "min-len":"minlen", "max-len": "maxlen"})
         self.arg_mapping["ref"] = {"varlabel":"varlabel"}
 
         # Contains all the lists for our reference type
         # This will be a mapping of varlabels to the list generated
         self.reftype_lookup = {}
+
+    @staticmethod
+    def __wrap_for_list(attributes):
+        """
+        Returns the given dictionary with the necessary attributes for lists
+        included. Note that this modifies the dictionary so if you don't like
+        side-effects, invoke this method on one-off dictionaries, ala
+
+            Titan.__wrap_for_list({})
+
+        In contrast to,
+
+            spam = {}
+            Titan.__wrap_for_list(spam)
+        """
+        attributes["delimiter"] = "delimiter"
+        attributes["count"] = "count"
+        attributes["sort-by"] = "sort_by"
+        attributes["varlabel"] = "varlabel"
+        return attributes
 
     def __int(self, mini, maxi):
         return random.randint(mini, maxi)
