@@ -156,7 +156,7 @@ class TitanTests(unittest.TestCase):
         for _ in range(self.test_precision):
             intlist = self.titan.interpret({
                 "type": "int-list", "min": 4, "max": 8, "count": 2,
-                "not-in": "queen"
+                "is-not": "queen"
             })
             self.assertNotEqual(is_not_list, intlist)
 

@@ -109,21 +109,23 @@ class Titan(object):
         is_not=None, contains_not=None
     ):
         return self.__lister(self.__int, {"maxi":maxi, "mini":mini}, count,
-          delimiter, sort_by, varlabel)
+          delimiter, sort_by, varlabel, is_not, contains_not)
 
     def __floatlist(
         self, mini, maxi, count, precision=None, delimiter=None, sort_by=None,
         varlabel=None, is_not=None, contains_not=None
     ):
         return self.__lister(self.__float, {"maxi":maxi, "mini":mini,
-          "precision":precision}, count, delimiter, sort_by, varlabel)
+          "precision":precision}, count, delimiter, sort_by, varlabel, is_not,
+          contains_not)
 
     def __strlist(
         self, maxlen, count, minlen=1, charset=None, delimiter=None,
         sort_by=None, varlabel=None, is_not=None, contains_not=None
     ):
         return self.__lister(self.__str, {"maxlen":maxlen, "minlen":minlen,
-          "charset":charset}, count, delimiter, sort_by, varlabel)
+          "charset":charset}, count, delimiter, sort_by, varlabel, is_not,
+          contains_not)
 
     def __ref(self, varlabel):
         prevls = self.reftype_lookup[varlabel]
