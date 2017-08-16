@@ -63,18 +63,24 @@ characters allowed in the string.
 
 List types allow you to group atomic types in a single line. Their type key is
 the same as their atomic counterparts _but_ appended with `-list`. They feature
-four new attributes: `delimiter`, `count`, `sort-by`, and `varlabel`.
+four new attributes as described below.
+
+- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
+- `count` - **Required.** The number of items in this list.
+- `sort-by` - **Optional; if unspecified, output is not sorted.** Either `"asc"`
+or `"desc"`.
+- `varlabel` - **Optional, null by default.** In case you want to refer to this
+list later.
+- 'is-not' - **Optional, null by default.** The `varlabel` of another list which
+_will not be_ equal to this list.
+- 'contains-not' - **Optional, null by default.** The `varlabel` of another list
+which makes it so that none of the items in the referred list is similar to the
+items in this new llist.
 
 `int-list` - List of integers.
 
 - `min` - **Required.** Minimum possible value
 - `max` - **Required.** Maximum possible value
-- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
-- `count` - **Required.** The number of items in this list.
-- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
-or `"desc"`.
-- `varlabel` - **Optional, null by default**. In case you want to refer to this
-list later.
 
 `float-list` - List of floats.
 
@@ -82,12 +88,6 @@ list later.
 - `max` - **Required.** Maximum possible value.
 - `precision` - **Default is whatever is set for your Python interpreter.** How
 many digits go after the decimal point?
-- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
-- `count` - **Required.** The number of items in this list.
-- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
-or `"desc"`.
-- `varlabel` - **Optional, null by default**. In case you want to refer to this
-list later.
 
 `str-list` - List of strings.
 
@@ -95,12 +95,6 @@ list later.
 characters allowed in the string.
 - `min-len` - **1 by default.** Minimum possible length of the string generated.
 - `max-len` - **Required.** Maximum possible length of the string generated.
-- `delimiter` - **Space by default.** The delimiter to separate the items of the list.
-- `count` - **Required.** The number of items in this list.
-- `sort-by` - **Optional; if unspecified, output is not sorted**. Either `"asc"`
-or `"desc"`.
-- `varlabel` - **Optional, null by default**. In case you want to refer to this
-list later.
 
 ## Reference type
 
