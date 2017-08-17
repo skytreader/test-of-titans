@@ -160,6 +160,22 @@ class TitanTests(unittest.TestCase):
             })
             self.assertNotEqual(is_not_list, intlist)
 
+    def test_lilst_notin_int(self):
+        not_in_list = self.titan.interpret({
+            "type": "int-list", "min": self.int_min, "max": self.int_max,
+            "count": self.list_maxlen, "varlabel": "spamkcd"
+        }).split()
+        not_in_list = [int(x) for x in not_in_list]
+
+        for _ in range(self.test_precision):
+            intlist = self.titan.interpret({
+                "type": "int-list", "min": self.int_min, "max": self.int_max,
+                "count": self.list_maxlen, "not-in": "spamkcd"
+            })
+
+            for i in intlist:
+                self.assertTrue(i not in not_in_list)
+
     def test_reftype_int(self):
         for label_id in range(self.test_precision):
             label = "varlabel" + str(label_id)

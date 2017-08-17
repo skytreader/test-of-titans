@@ -77,7 +77,7 @@ class Titan(object):
       varlabel=None, is_not=None, not_in=None):
         delimiter = delimiter if delimiter else " "
         is_not_ls = self.reftype_lookup.get(is_not, None)
-        if not_in is not None:
+        if not_in is None:
             ls = [atom_fun(**atom_args) for _ in range(count)]
         else:
             exclude = set(self.reftype_lookup.get(not_in, []))
