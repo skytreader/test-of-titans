@@ -59,7 +59,7 @@ class Titan(object):
         attributes["sort-by"] = "sort_by"
         attributes["varlabel"] = "varlabel"
         attributes["is-not"] = "is_not"
-        attributes["contains-not"] = "contains_not"
+        attributes["not-in"] = "not_in"
         return attributes
 
     def __int(self, mini, maxi):
@@ -74,13 +74,13 @@ class Titan(object):
         return "".join([random.choice(charset) for _ in range(random.randint(minlen, maxlen))])
 
     def __lister(self, atom_fun, atom_args, count, delimiter=None, sort_by=None,
-      varlabel=None, is_not=None, contains_not=None):
+      varlabel=None, is_not=None, not_in=None):
         delimiter = delimiter if delimiter else " "
         is_not_ls = self.reftype_lookup.get(is_not, None)
-        if contains_not is not None:
+        if not_in is not None:
             ls = [atom_fun(**atom_args) for _ in range(count)]
         else:
-            exclude = set(self.reftype_lookup.get(contains_not, []))
+            exclude = set(self.reftype_lookup.get(not_in, []))
             ls = []
             for _ in range(count):
                 spam = atom_fun(**atom_args)
@@ -94,7 +94,7 @@ class Titan(object):
         if ls == is_not_ls:
             return self.__lister(
                 atom_fun, atom_args, count, delimiter, sort_by, varlabel,
-                is_not, contains_not
+                is_not, not_in
             )
 
         print_ls = delimiter.join(list(map(str, ls)))
@@ -106,26 +106,26 @@ class Titan(object):
 
     def __intlist(
         self, mini, maxi, count, delimiter=None, sort_by=None, varlabel=None,
-        is_not=None, contains_not=None
+        is_not=None, not_in=None
     ):
         return self.__lister(self.__int, {"maxi":maxi, "mini":mini}, count,
-          delimiter, sort_by, varlabel, is_not, contains_not)
+          delimiter, sort_by, varlabel, is_not, not_in)
 
     def __floatlist(
         self, mini, maxi, count, precision=None, delimiter=None, sort_by=None,
-        varlabel=None, is_not=None, contains_not=None
+        varlabel=None, is_not=None, not_in=None
     ):
         return self.__lister(self.__float, {"maxi":maxi, "mini":mini,
           "precision":precision}, count, delimiter, sort_by, varlabel, is_not,
-          contains_not)
+          not_in)
 
     def __strlist(
         self, maxlen, count, minlen=1, charset=None, delimiter=None,
-        sort_by=None, varlabel=None, is_not=None, contains_not=None
+        sort_by=None, varlabel=None, is_not=None, not_in=None
     ):
         return self.__lister(self.__str, {"maxlen":maxlen, "minlen":minlen,
           "charset":charset}, count, delimiter, sort_by, varlabel, is_not,
-          contains_not)
+          not_in)
 
     def __ref(self, varlabel):
         prevls = self.reftype_lookup[varlabel]

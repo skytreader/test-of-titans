@@ -73,7 +73,7 @@ or `"desc"`.
 list later.
 - 'is-not' - **Optional, null by default.** The `varlabel` of another list which
 _will not be_ equal to this list.
-- 'contains-not' - **Optional, null by default.** The `varlabel` of another list
+- 'not-in' - **Optional, null by default.** The `varlabel` of another list
 which makes it so that none of the items in the referred list is similar to the
 items in this new llist.
 
