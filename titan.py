@@ -123,6 +123,7 @@ class Titan(object):
         self, maxlen, count, minlen=1, charset=None, delimiter=None,
         sort_by=None, varlabel=None, is_not=None, not_in=None
     ):
+        minlen = minlen if minlen is not None else 1
         return self.__lister(self.__str, {"maxlen":maxlen, "minlen":minlen,
           "charset":charset}, count, delimiter, sort_by, varlabel, is_not,
           not_in)
