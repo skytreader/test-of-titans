@@ -136,6 +136,9 @@ class Titan(object):
         """
         Pass the type maps here. Note: pass Python dicts, not JSON maps for
         parsing.
+
+        This will always return a string to be printed out. Unit tests should
+        ensure that the strings are easily parseable for inspection.
         """
         generator_method = self.type_map[rule["type"]]
         arglist = self.arg_mapping[rule["type"]]

@@ -184,10 +184,25 @@ class TitanTests(unittest.TestCase):
 
         for _ in range(self.test_precision):
             strlist = self.titan.interpret({
-                "type": "str-list", "max-len": 3, "charset": "abc", "is-not": "abc",
+                "type": "str-list", "max-len": 2, "charset": "abc", "is-not": "abc",
                 "count": 2
             })
             self.assertNotEqual(is_not_str, strlist)
+
+    def test_list_notin_str(self):
+        not_in_list = self.titan.interpret({
+            "type": "str-list", "max-len": 2, "charset": "abc", "varlabel": "abc",
+            "count": int(self.list_maxlen / 4)
+        }).split()
+
+        for _ in range(self.test_precision):
+            strlist = self.titan.interpret({
+                "type": "str-list", "max-len": 2, "charset": "abc", "not-in": "abc",
+                "count": self.list_maxlen
+            }).split()
+
+            for s in strlist:
+                self.assertTrue(s not in not_in_list)
 
     def test_reftype_int(self):
         for label_id in range(self.test_precision):
