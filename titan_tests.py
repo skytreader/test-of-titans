@@ -171,7 +171,8 @@ class TitanTests(unittest.TestCase):
             intlist = self.titan.interpret({
                 "type": "int-list", "min": self.int_min, "max": self.int_max,
                 "count": self.list_maxlen, "not-in": "spamkcd"
-            })
+            }).split()
+            intlist = [int(x) for x in intlist]
 
             for i in intlist:
                 self.assertTrue(i not in not_in_list)
