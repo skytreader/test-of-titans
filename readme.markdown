@@ -34,7 +34,14 @@ in the next section.
 # Types and related attributes
 
 Every line in a test case is a particular type. This section explains the
-available types for test.
+available types for test and their attributes.
+
+Every type, atomic or list, can have the following attributes:
+
+- `repeat` - **1 by default.** Should always be an integer value greater than 1.
+Specifies how many times to print out this particular type, once per line. Useful
+for test inputs made up of _n_ sections of data, where each section has a
+property that can be described by a particular attribute set.
 
 ## Atomic types
 
@@ -71,9 +78,9 @@ four new attributes as described below.
 or `"desc"`.
 - `varlabel` - **Optional, null by default.** In case you want to refer to this
 list later.
-- 'is-not' - **Optional, null by default.** The `varlabel` of another list which
+- `is-not` - **Optional, null by default.** The `varlabel` of another list which
 _will not be_ equal to this list.
-- 'not-in' - **Optional, null by default.** The `varlabel` of another list
+- `not-in` - **Optional, null by default.** The `varlabel` of another list
 which makes it so that none of the items in the referred list is similar to the
 items in this new llist.
 
