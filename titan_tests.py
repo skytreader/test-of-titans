@@ -19,7 +19,8 @@ class TitanTests(unittest.TestCase):
         self.list_maxlen = 100
 
         self.test_precision = 100
-    
+        self.repeat = 200
+
     def test_atomic_int(self):
         for _ in range(self.test_precision):
             retint = int(self.titan.interpret({"type":"int", "min":self.int_min,
@@ -40,6 +41,22 @@ class TitanTests(unittest.TestCase):
 
             for c in retstr:
                 self.assertTrue(c in string.hexdigits)
+
+    def test_atomic_string_repeat(self):
+        for _ in range(self.test_precision):
+            retstring = self.titan.interpret({
+                "type": "str", "charset": string.hexdigits,
+                "min-len": self.str_minlen, "max-len": self.str_maxlen,
+                "repeat": self.repeat
+            }).split("\n")
+
+            self.assertEqual(self.repeat, len(retstring))
+
+            for atom in retstring:
+                self.assertTrue(self.str_minlen <= len(atom) <= self.str_maxlen)
+
+                for c in atom:
+                    self.assertTrue(c in string.hexdigits)
 
     def test_list_int(self):
         for _ in range(self.test_precision):

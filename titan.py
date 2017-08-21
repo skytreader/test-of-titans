@@ -143,14 +143,11 @@ class Titan(object):
         generator_method = self.type_map[rule["type"]]
         arglist = self.arg_mapping[rule["type"]]
         constructed_args = {}
-        repeat = 1
+        # The repeat parameter is handled specially in this method, as
+        # opposed to passing it off to a generator method.
+        repeat = rule.get("repeat", 1)
 
         for jspec_key in arglist.keys():
-            # The repeat parameter is handled specially in this method, as
-            # opposed to passing it off to a generator method.
-            if jspec_key == "repeat":
-                repeat = int(rule[jspec_key])
-                continue
             constructed_args[arglist[jspec_key]] = rule.get(jspec_key)
 
         if repeat == 1:
