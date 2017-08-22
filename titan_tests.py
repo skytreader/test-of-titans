@@ -69,6 +69,22 @@ class TitanTests(unittest.TestCase):
             for item in intlist:
                 self.assertTrue(self.int_min <= item <= self.int_max)
 
+    def test_list_int_repeat(self):
+        for _ in range(self.test_precision):
+            expected_len = random.randint(self.list_minlen, self.list_maxlen)
+            repeat_list = self.titan.interpret({
+                "type": "int-list", "min": self.int_min, "max": self.int_max,
+                "count": expected_len, "repeat": self.repeat
+            }).split("\n")
+            self.assertEqual(self.repeat, len(repeat_list))
+
+            for line in repeat_list:
+                intlist = [int(x) for x in line.split()]
+                self.assertEqual(expected_len, len(intlist))
+
+                for item in intlist:
+                    self.assertTrue(self.int_min <= item <= self.int_max)
+
     def test_sorted_list_int(self):
         half_run = int(self.test_precision / 2)
         for _ in range(half_run):
