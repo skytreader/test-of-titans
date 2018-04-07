@@ -132,7 +132,7 @@ class Titan(object):
         prevls = self.reftype_lookup[varlabel]
         return str(random.choice(prevls))
 
-    def interpret(self, rule):
+    def interpret(self, rule, separator):
         """
         Pass the type maps here. Note: pass Python dicts, not JSON maps for
         parsing.
@@ -153,7 +153,7 @@ class Titan(object):
         if repeat == 1:
             return generator_method(**constructed_args)
         else:
-            return "\n".join([generator_method(**constructed_args) for _ in range(repeat)])
+            return separator.join([generator_method(**constructed_args) for _ in range(repeat)])
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -169,4 +169,4 @@ if __name__ == "__main__":
 
         for i in range(spec["case-count"]):
             for rule in spec["case-format"]:
-                print(titan.interpret(rule))
+                print(titan.interpret(rule, spec.get("case-sep", "\n")))

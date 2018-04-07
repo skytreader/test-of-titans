@@ -17,6 +17,7 @@ Pass a JSON file that contains the specifications of your test input. Example,
     {
         "case-count": 8,
         "include-case-count": true,
+        "case-sep": " ",
         "case-format":[
             {"type": "int-list", "min":0, "max":1000000, "count":2, "sort-by":asc"}
         ]
@@ -26,6 +27,9 @@ Pass a JSON file that contains the specifications of your test input. Example,
 
 `include-case-count` is a boolean flag that specifies whether we include the
 `case-count` in the output or not.
+
+`case-sep` specifies the character used to join testcases. This is a newline by
+default.
 
 `case-format` describes a test case. The value is a list, containing specifications
 on the lines that will comprise the test case. The possible values are described
